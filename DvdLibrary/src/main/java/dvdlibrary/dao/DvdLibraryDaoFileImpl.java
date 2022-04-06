@@ -15,7 +15,6 @@ import java.util.Scanner;
  *
  * @author Grant
  */
-// Will extend interface when interface is complete
 public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
     // Hash Map containing Dvd database
     private Map<String, Dvd> mapDvd = new HashMap<>();
@@ -24,6 +23,16 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
     private static final String DATA_BASE = "dvdDataBase.txt";
     private static final String DELIMETER = ",";
     
+    
+    /**
+     * Adds a dvd to the map associated with this instance of the class, then 
+     *   writes the updated map to the db.
+     * 
+     * @param dvdId, the id for the dvd used as the map key.
+     * @param dvd, the Dvd object used as the value for the map.
+     * @return
+     * @throws IOException 
+     */
     @Override
     public Dvd addDvd(String dvdId, Dvd dvd) throws IOException{
         // Read in db for data completeness
@@ -215,10 +224,7 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
      * 
      * @throws IOException 
      */
-    private void writeDataBase() throws IOException{
-        // Create variable for Dvd string to be written
-        String dvdAsText;
-        
+    private void writeDataBase() throws IOException{      
         // Create variable to hold all Dvd data
         List<Dvd> dvdList;
         
