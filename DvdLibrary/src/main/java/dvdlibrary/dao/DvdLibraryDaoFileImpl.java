@@ -1,10 +1,250 @@
 package dvdlibrary.dao;
+import dvdlibrary.dto.Dvd;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Scanner;
 
 /**
  *
  * @author Grant
  */
 // Will extend interface when interface is complete
-public class DvdLibraryDaoFileImpl {
+public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
+    // Hash Map containing Dvd database
+    private Map<String, Dvd> mapDvd = new HashMap<>();
     
+    // Constants for file name, delimeter
+    private static final String DATA_BASE = "dvdDataBase.txt";
+    private static final String DELIMETER = ",";
+    
+    @Override
+    public Dvd addDvd(String dvdId, Dvd dvd) throws IOException{
+        // Read in db for data completeness
+        this.readDataBase();
+        
+        // Insert the new dvd object into map
+        Dvd newDvd = mapDvd.put(dvdId, dvd);
+        
+        // Write updated map to db
+        this.writeDataBase();
+        
+        // Return Dvd object, null if inserted successfully
+        return newDvd;
+    }
+
+    
+    /**
+     * 
+     * @return
+     * @throws IOException 
+     */
+    @Override
+    public List<Dvd> getAllDvds() throws IOException{
+        // Read in db for data completeness
+        this.readDataBase();
+        
+        // Convert, return dvd data
+        return new ArrayList<>(mapDvd.values());   
+    }
+
+    
+    /**
+     * 
+     * @param dvdId
+     * @return
+     * @throws IOException 
+     */
+    @Override
+    public Dvd getDvd(String dvdId) throws IOException {
+        // Read in db for data completeness
+        this.readDataBase();
+        
+        // Return the Dvd specified by dvdId
+        return mapDvd.get(dvdId);
+    }
+
+    
+    /**
+     * 
+     * @param dvdId
+     * @return
+     * @throws IOException 
+     */
+    @Override
+    public Dvd removeDvd(String dvdId) throws IOException{
+        // Read in db for data completeness
+        this.readDataBase();
+        
+        // Remove the selected object
+        Dvd removedDvd = mapDvd.remove(dvdId);
+        
+        // Write the updated map to the db
+        this.writeDataBase();
+        
+        // Return Dvd object, null if key was not populated
+        return removedDvd;
+    }
+    
+    
+    /**
+     * Transforms (marshals) object field data into a string with delimeter's 
+     *   in between each field. The string has the structure
+     * 
+     * @param dvd, the Dvd object to extract data from.
+     * @return a string denoting the Dvd object as a string.
+     */
+    private String marshal(Dvd dvd){
+        // Create StringBuilder variable to hold object data
+        StringBuilder dvdAsString = new StringBuilder();
+        
+        // Add Dvd id, delimeter to sb
+        dvdAsString.append(dvd.getId()).append(DELIMETER);
+        
+        // Add Dvd title, delimeter to sb
+        dvdAsString.append(dvd.getTitle()).append(DELIMETER);
+        
+        // Add releaseDate, delimeter to sb
+        dvdAsString.append(dvd.getReleaseData()).append(DELIMETER);
+        
+        // Add mpaaReatingm, delimeter to sb
+        dvdAsString.append(dvd.getMpaaRating()).append(DELIMETER);
+        
+        // Add director, delimeter to sb
+        dvdAsString.append(dvd.getDirector()).append(DELIMETER);
+        
+        // Add studio name, delimeter to sb
+        dvdAsString.append(dvd.getStudio()).append(DELIMETER);
+        
+        // Add userRating, delimter to sb                
+        dvdAsString.append(dvd.getUserRating()).append(DELIMETER);
+        
+        // Convert stringbuilder to string, return 
+        return dvdAsString.toString();
+    }
+    
+    
+    /**
+     * Unmarshals Dvd data from a single string into a new Dvd object.
+     * 
+     * @param dvdAsText, a string denoting Dvd object data.
+     * @return Dvd object containing all of the info from dvdAsText in object 
+     *   form.
+     */
+    private Dvd unmarshal(String dvdAsText){
+        // Create String array for dvd text split
+        String[] dvdData;
+        
+        // Create Dvd object to hold new data
+        Dvd dvd = new Dvd();
+        
+        // Split the dvd string based on delimeter
+        dvdData = dvdAsText.split(DELIMETER, 7);
+        
+        // Set dvd id
+        dvd.setId(dvdData[0]);
+        
+        // Set dvd title
+        dvd.setTitle(dvdData[1]);
+        
+        // Set releaseData
+        dvd.setReleaseData(dvdData[2]);
+        
+        // Set dvd mpaaRating
+        dvd.setMpaaRating(dvdData[3]);
+        
+        // Set dvd director 
+        dvd.setDirector(dvdData[4]);
+        
+        // Set dvd studio
+        dvd.setStudio(dvdData[5]);
+        
+        // Set user rating
+        dvd.setUserRating(dvdData[6]);
+        
+        // Return populated dvd object
+        return dvd;
+    }
+    
+    
+    /**
+     * 
+     * @throws IOException 
+     */
+    private void readDataBase() throws IOException{
+        // Create scanner object to read in data from file
+        Scanner scan;
+        
+        // Create string to hold object as text
+        String currLine;
+        
+        // Create dvd object to hold unmarshaled data
+        Dvd currDvd;
+        
+        // Ensure the file exists
+        try{
+            scan = new Scanner(new BufferedReader(new FileReader(DATA_BASE)));
+        }catch(IOException e){
+            throw new IOException("File not found.", e);
+        }
+        
+        // Loop through all lines of the text file
+        while(scan.hasNextLine()){
+            // Obtain the next line of text
+            currLine = scan.nextLine();
+            
+            // Unmarshal text line into a Dvd object
+            currDvd = unmarshal(currLine);
+            
+            // Put the current Dvd object into the hashmap
+            mapDvd.put(currDvd.getId(), currDvd);
+        }
+        // Close the scanner to prevent meory leaks
+        scan.close();
+        
+    }
+    
+    
+    /**
+     * 
+     * @throws IOException 
+     */
+    private void writeDataBase() throws IOException{
+        // Create variable for Dvd string to be written
+        String dvdAsText;
+        
+        // Create variable to hold all Dvd data
+        List<Dvd> dvdList;
+        
+        // Create new PrintWriter object for writing to text file
+        PrintWriter out;
+        
+        // Open the existing text file
+        try {
+            out = new PrintWriter(new FileWriter(DATA_BASE));
+        } catch (IOException e) {
+            throw new IOException("File not found.", e);
+        }
+        
+        // Set dvd list, iterate through all of them
+        dvdList = this.getAllDvds();
+        for(Dvd currDvd : dvdList){
+            // Marshal dvd object data into string
+            String currentDvdAsText = this.marshal(currDvd);
+            
+            // Write the current Dvd text data 
+            out.println(currentDvdAsText);
+            
+            // Force PrintWriter to write the line to the file
+            out.flush();
+        }
+        // Close the PrintWriter to prevent memory leak
+        out.close();
+    }
 }
