@@ -18,22 +18,14 @@ public interface DvdLibraryDao {
      * @return the Dvd object associated with the id if already present, 
      *   otherwise null.
      */    
-    Dvd addDvd(String dvdId, Dvd dvd) throws IOException;
+    Dvd addDvd(String dvdId, Dvd dvd) throws DvdLibraryDaoException;
     
     
     /**
      * 
      * @return 
      */
-    List<Dvd> getAllDvds() throws IOException;
-    
-    
-    /**
-     * 
-     * @param dvdId
-     * @return 
-     */
-    Dvd getDvd(String dvdId) throws IOException;
+    List<Dvd> getAllDvds() throws DvdLibraryDaoException;
     
     
     /**
@@ -41,7 +33,15 @@ public interface DvdLibraryDao {
      * @param dvdId
      * @return 
      */
-    Dvd removeDvd(String dvdId) throws IOException;
+    Dvd getDvd(String dvdId) throws DvdLibraryDaoException;
+    
+    
+    /**
+     * 
+     * @param dvdId
+     * @return 
+     */
+    Dvd removeDvd(String dvdId) throws DvdLibraryDaoException;
     
     
 }

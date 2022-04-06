@@ -34,7 +34,7 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
      * @throws IOException 
      */
     @Override
-    public Dvd addDvd(String dvdId, Dvd dvd) throws IOException{
+    public Dvd addDvd(String dvdId, Dvd dvd) throws DvdLibraryDaoException {
         // Read in db for data completeness
         this.readDataBase();
         
@@ -55,7 +55,7 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
      * @throws IOException 
      */
     @Override
-    public List<Dvd> getAllDvds() throws IOException{
+    public List<Dvd> getAllDvds() throws DvdLibraryDaoException{
         // Read in db for data completeness
         this.readDataBase();
         
@@ -71,7 +71,7 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
      * @throws IOException 
      */
     @Override
-    public Dvd getDvd(String dvdId) throws IOException {
+    public Dvd getDvd(String dvdId) throws DvdLibraryDaoException {
         // Read in db for data completeness
         this.readDataBase();
         
@@ -87,7 +87,7 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
      * @throws IOException 
      */
     @Override
-    public Dvd removeDvd(String dvdId) throws IOException{
+    public Dvd removeDvd(String dvdId) throws DvdLibraryDaoException{
         // Read in db for data completeness
         this.readDataBase();
         
@@ -186,7 +186,7 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
      * 
      * @throws IOException 
      */
-    private void readDataBase() throws IOException{
+    private void readDataBase() throws DvdLibraryDaoException{
         // Create scanner object to read in data from file
         Scanner scan;
         
@@ -200,7 +200,7 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
         try{
             scan = new Scanner(new BufferedReader(new FileReader(DATA_BASE)));
         }catch(IOException e){
-            throw new IOException("File not found.", e);
+            throw new DvdLibraryDaoException("Could not read from database", e);
         }
         
         // Loop through all lines of the text file
@@ -224,7 +224,7 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
      * 
      * @throws IOException 
      */
-    private void writeDataBase() throws IOException{      
+    private void writeDataBase() throws DvdLibraryDaoException{      
         // Create variable to hold all Dvd data
         List<Dvd> dvdList;
         
@@ -235,7 +235,7 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
         try {
             out = new PrintWriter(new FileWriter(DATA_BASE));
         } catch (IOException e) {
-            throw new IOException("File not found.", e);
+            throw new DvdLibraryDaoException("Could not write to database", e);
         }
         
         // Set dvd list, iterate through all of them
