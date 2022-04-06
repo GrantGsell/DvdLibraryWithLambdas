@@ -1,4 +1,9 @@
-public class DVDLibraryView {
+package dvdlibrary.ui;
+
+import java.util.List;
+import dvdlibrary.dto.Dvd;
+
+public class DvdLibraryView {
 
     // Display menu selection
 
@@ -20,22 +25,26 @@ public class DVDLibraryView {
     
 
     // Display the DVD List 
-    public void displayDVDList (List<DVD> DVDLibrary) //or should it be displayDVDLibrary ?
+    public void displayDvdList (List<Dvd> DVDLibrary) //or should it be displayDVDLibrary ?
     {
-        for (DVD : dvdList)
+        for (Dvd currentDVD : DVDLibrary)
         {
-            String dvdInfo = String.format("#%s : %s %s",
-                    currentDVD.getDvdID();
-                    currentDVD.getDvdTitle();
-                    currentDVD.getDvdDate());
+            String dvdInfo = String.format("DVDid: %s DVDTitle: %s DVDDate: %s MPAARating : %s DirectorName : %s Studio : %s UserRating : %s" ,
+                    currentDVD.getId(),
+                    currentDVD.getTitle(),
+                    currentDVD.getReleaseData(),
+                    currentDVD.getMpaaRating(),
+                    currentDVD.getDirector(),
+                    currentDVD.getStudio(),
+                    currentDVD.getUserRating());
 
-            io.print(DvdInfo);
+            io.print(dvdInfo);
         }
         io.readString("Hit enter to continue.");
     }
 
     //Display DVD info <--Should this go above the display list method?
-    public DVD getDvdInfo()
+    public Dvd getDvdInfo()
     {
         String title = io.readString("Enter DVD Title:");
         String releaseData = io.readString("Enter DVD Release Date:");
@@ -43,12 +52,81 @@ public class DVDLibraryView {
         String director = io.readString("Enter name of Director:");
         String studio = io.readString("Enter Studio:");
         String userRating = io.readString("Enter user rating:");
+        String dvdId = io.readString("Enter DVD ID:");
+        Dvd currentDvd = new Dvd();
+        currentDvd.setId(dvdId);
+        currentDvd.setDirector(director);
+        currentDvd.setMpaaRating(mpaaRating);
+        currentDvd.setReleaseData(releaseData);
+        currentDvd.setStudio(studio);
+        currentDvd.setTitle(title);
+        currentDvd.setUserRating(userRating);
+        return currentDvd;
         
     }
 
-    //Display DVD Banner
+    public void displayDvdInfo(Dvd dvd)
+    {
+        io.print(dvd.getTitle());
+        io.print(dvd.getId());
+        io.print(dvd.getReleaseData());
+        io.print(dvd.getMpaaRating());
+        io.print(dvd.getDirector());
+        io.print(dvd.getStudio());
+        io.print(dvd.getUserRating());
+        
+    }
 
-    //Display DVD List Banner (All the DVDs that were entered / on the list)
+    public String getDvdTitle()
+    {
+        String title = io.readString("What is the Title of the DVD?: ");
+        return title;
+    }
+
+    public void displayExitBanner() 
+    {
+        io.print("=== Good Bye! ===");
+    }
+
+    public void displayUnknownCommandBanner() 
+    {
+        io.print("=== Unknown Command ===");
+    }
+
+    public void displayAddDvdBanner() 
+    {
+        io.print("=== Add DVD ===");
+    }
+
+    public void displayAddDvdSuccessBanner() 
+    {
+        io.print("=== Success! ===");
+    }
+
+    public void displayRemoveDvdBanner() 
+    {
+        io.print("=== Remove DVD ===");
+    }
+
+    public void displayRemoveDvdSuccessBanner() 
+    {
+        io.print("=== Success! ===");
+    }
+
+    public void displayListDvdsBanner() 
+    {
+        io.print("=== List Of DVDs ===");
+    }
+
+    public void displayViewDvdBanner() 
+    {
+        io.print("=== DVD Details ===");
+    }
+
+    public void displaySearchDVDBanner() 
+    {
+        io.print("=== DVD Search ===");
+    }
 
     
 
