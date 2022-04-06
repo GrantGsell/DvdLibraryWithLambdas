@@ -2,7 +2,7 @@ package dvdlibrary.dto;
 
 /**
  *
- * @author Grant
+ * @author Full Team
  */
 public class Dvd {
     // DVD Fields
@@ -12,11 +12,16 @@ public class Dvd {
     String director;
     String studio;
     String userRating;
+    String dvdId;
     
     // DVD Constructor
     
     
     // DVD Getters
+    public String getId(){
+        return dvdId;
+    }
+    
     public String getTitle() {
         return title;
     }
@@ -42,6 +47,10 @@ public class Dvd {
     }
 
     // DVD Setters
+    public void setId(String dvdId){
+        this.dvdId = dvdId;
+    }
+    
     public void setTitle(String title) {
         this.title = title;
     }
