@@ -1,4 +1,4 @@
-public class DVDLibraryView {
+public class DvdLibraryView {
 
     // Display menu selection
 
