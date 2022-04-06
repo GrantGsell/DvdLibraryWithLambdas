@@ -1,115 +1,55 @@
-package dvdlibrary.ui;
-import dvdlibrary.dto.Dvd;
-import java.util.List;
-/**
- *
- * @author Grant
- */
-public class DvdLibraryView {
-    //private UserIO io = new UserIOConsoleImpl();
-    private UserIO io;
-    
-    // Constructor
-    public DvdLibraryView(UserIO io){
-        this.io = io;
-    }
+public class DVDLibraryView {
 
-    public int printMenuAndGetSelection() {
+    // Display menu selection
+
+    private UserIO io = new UserIOConsoleImpl();
+
+    // Note: Re-using code from StudentQuiz & Class Roster programs
+    public int getMenuSelection()
+    {
         io.print("Main Menu");
-        io.print("1. List Students");
-        io.print("2. Create New Student");
-        io.print("3. View a Student");
-        io.print("4. Remove a Student");
-        io.print("5. Exit");
+        io.print("1. Add DVD to Collection");
+        io.print("2. Remove a DVD from Collection");
+        io.print("3. Edit a DVD ");
+        io.print("4. List the DVDs in the collection");
+        io.print("5. Display info of a particular DVD");
+        io.print("6. Search a DVD by Title");
 
-        return io.readInt("Please select from the above choices.", 1, 5);
+        return io.readInt("Select one of the choices above:");
     }
     
-    public Student getNewStudentInfo() {
-        String studentId = io.readString("Please enter Student ID");
-        String firstName = io.readString("Please enter First Name");
-        String lastName = io.readString("Please enter Last Name");
-        String cohort = io.readString("Please enter Cohort");
-        Student currentStudent = new Student(studentId);
-        currentStudent.setFirstName(firstName);
-        currentStudent.setLastName(lastName);
-        currentStudent.setCohort(cohort);
-        return currentStudent;
-    }
-    
-    public void displayCreateStudentBanner() {
-        io.print("=== Create Student ===");
-    }
-    
-    public void displayCreateSuccessBanner() {
-        io.readString(
-                "Student successfully created.  Please hit enter to continue");
-    }
-    
-    public void displayStudentList(List<Student> studentList) {
-        for (Student currentStudent : studentList) {
-            String studentInfo = String.format("#%s : %s %s",
-                    currentStudent.getStudentId(),
-                    currentStudent.getFirstName(),
-                    currentStudent.getLastName());
-            io.print(studentInfo);
+
+    // Display the DVD List 
+    public void displayDVDList (List<DVD> DVDLibrary) //or should it be displayDVDLibrary ?
+    {
+        for (DVD : dvdList)
+        {
+            String dvdInfo = String.format("#%s : %s %s",
+                    currentDVD.getDvdID();
+                    currentDVD.getDvdTitle();
+                    currentDVD.getDvdDate());
+
+            io.print(DvdInfo);
         }
-        io.readString("Please hit enter to continue.");
-    }
-    
-    public void displayDisplayAllBanner() {
-        io.print("=== Display All Students ===");
-    }
-    
-    
-    public void displayDisplayStudentBanner () {
-        io.print("=== Display Student ===");
-    }
-    
-    
-    public String getStudentIdChoice() {
-        return io.readString("Please enter the Student ID.");
-    }
-    
-    
-    public void displayStudent(Student student) {
-        if (student != null) {
-            io.print(student.getStudentId());
-            io.print(student.getFirstName() + " " + student.getLastName());
-            io.print(student.getCohort());
-            io.print("");
-        } else {
-            io.print("No such student.");
-        }
-        io.readString("Please hit enter to continue.");
-    }
-    
-    
-    public void displayRemoveStudentBanner () {
-        io.print("=== Remove Student ===");
+        io.readString("Hit enter to continue.");
     }
 
-    
-    public void displayRemoveResult(Student studentRecord) {
-        if(studentRecord != null){
-            io.print("Student successfully removed.");
-        }else{
-            io.print("No such student.");
-        }
-        io.readString("Please hit enter to continue.");
+    //Display DVD info <--Should this go above the display list method?
+    public DVD getDvdInfo()
+    {
+        String title = io.readString("Enter DVD Title:");
+        String releaseData = io.readString("Enter DVD Release Date:");
+        String mpaaRating = io.readString("Enter MPAA Rating:");
+        String director = io.readString("Enter name of Director:");
+        String studio = io.readString("Enter Studio:");
+        String userRating = io.readString("Enter user rating:");
+        
     }
+
+    //Display DVD Banner
+
+    //Display DVD List Banner (All the DVDs that were entered / on the list)
+
     
-    
-    public void displayExitBanner() {
-        io.print("Good Bye!!!");
-    }
-    
-    public void displayUnknownCommandBanner() {
-        io.print("Unknown Command!!!");
-    }
-    
-    public void displayErrorMessage(String errorMsg) {
-        io.print("=== ERROR ===");
-        io.print(errorMsg);
-    }
+
 }
