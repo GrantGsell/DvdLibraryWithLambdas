@@ -83,6 +83,12 @@ public class DvdLibraryView {
         return title;
     }
 
+    public String getDvdId()
+    {
+        String Id = io.readString("What is the DVD's ID?: ");
+        return Id;
+    }
+
     public void displayExitBanner() 
     {
         io.print("=== Good Bye! ===");
@@ -123,11 +129,19 @@ public class DvdLibraryView {
         io.print("=== DVD Details ===");
     }
 
-    public void displaySearchDVDBanner() 
+    public void displaySearchDvdBanner() 
     {
         io.print("=== DVD Search ===");
     }
 
+    public void displayEditDvdBanner() 
+    {
+        io.print("=== Edit DVD ===");
+    }
     
+    public void displayEditDvdSuccessBanner() 
+    {
+        io.print("=== Success! ===");
+    }
 
 }
