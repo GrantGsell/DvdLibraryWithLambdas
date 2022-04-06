@@ -42,6 +42,9 @@ public class DvdLibraryController {
                     case 6:
                         searchDvdTitle(); // TBI
                         break;
+                    case 7:
+                        keepGoing = false;
+                        break;
                     default:
                         unknownCommand();
                 }
