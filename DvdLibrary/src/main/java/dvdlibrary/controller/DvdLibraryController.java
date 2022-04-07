@@ -50,7 +50,7 @@ public class DvdLibraryController {
                         unknownCommand();
                 }
             }
-        }catch(IOException e){
+        }catch(DvdLibraryDaoException e){
             System.out.println(e.getMessage());
             //view.print(e.getMessage());
         }
