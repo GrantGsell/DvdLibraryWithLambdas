@@ -22,24 +22,27 @@ public interface DvdLibraryDao {
     
     
     /**
+     * Returns a List of all Dvds stored in the database.
      * 
-     * @return 
+     * @return a List containing all Dvds stored in the database.
      */
     List<Dvd> getAllDvds() throws DvdLibraryDaoException;
     
     
     /**
+     * Gets a singular Dvd object based on its associated dvdId.
      * 
-     * @param dvdId
-     * @return 
+     * @param dvdId the id for an associated Dvd object.
+     * @return a Dvd object if one already exists for that key, null otherwise.
      */
     Dvd getDvd(String dvdId) throws DvdLibraryDaoException;
     
     
     /**
+     * Removes a Dvd object from the database according to the provided id.
      * 
-     * @param dvdId
-     * @return 
+     * @param dvdId the id of the Dvd object to be removed.
+     * @return the Dvd object that was removed, null otherwise.
      */
     Dvd removeDvd(String dvdId) throws DvdLibraryDaoException;
     

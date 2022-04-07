@@ -22,16 +22,15 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
     // Constants for file name, delimeter
     private static final String DATA_BASE = "dvdDataBase.txt";
     private static final String DELIMETER = ",";
-    
-    
+       
     /**
      * Adds a dvd to the map associated with this instance of the class, then 
      *   writes the updated map to the db.
      * 
      * @param dvdId, the id for the dvd used as the map key.
      * @param dvd, the Dvd object used as the value for the map.
-     * @return
-     * @throws IOException 
+     * @return a Dvd object if the associated id was populated, null otherwise.
+     * @throws DvdLibraryDaoException 
      */
     @Override
     public Dvd addDvd(String dvdId, Dvd dvd) throws DvdLibraryDaoException {
@@ -50,9 +49,10 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
 
     
     /**
+     * Returns a List of all Dvds stored in the database.
      * 
-     * @return
-     * @throws IOException 
+     * @return a List of all Dvds in the database.
+     * @throws DvdLibraryDaoException 
      */
     @Override
     public List<Dvd> getAllDvds() throws DvdLibraryDaoException{
@@ -65,10 +65,12 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
 
     
     /**
+     * Obtains a singular Dvd object associated provided id.
      * 
-     * @param dvdId
-     * @return
-     * @throws IOException 
+     * @param dvdId the id for the particular Dvd object in question.
+     * @return A Dvd object if one exists with the associated id, null 
+     *   otherwise.
+     * @throws DvdLibraryDaoException 
      */
     @Override
     public Dvd getDvd(String dvdId) throws DvdLibraryDaoException {
@@ -81,10 +83,12 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
 
     
     /**
+     * Removed a Dvd from the database based on the provided id parameter.
      * 
-     * @param dvdId
-     * @return
-     * @throws IOException 
+     * @param dvdId an id to specify which Dvd object to remove.
+     * @return the Dvd object that was removed, null if the key provided does 
+     *   not have an associated Dvd object.
+     * @throws DvdLibraryDaoException 
      */
     @Override
     public Dvd removeDvd(String dvdId) throws DvdLibraryDaoException{
@@ -183,8 +187,15 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
     
     
     /**
+     * Read in all of the data from the database and stores it in the HashMap
+     *   associated with this object instance.
      * 
-     * @throws IOException 
+     * @throws DvdLibraryDaoException 
+     * Note: The string being read in should appear like so in this exact order:
+     * 
+     * Id | Title | Release Date | Mpaa Rating | Director | Studio | User Rating
+     *  0 |   1   |      2       |      3      |     4    |    5   |     6  
+     * 
      */
     private void readDataBase() throws DvdLibraryDaoException{
         // Create scanner object to read in data from file
@@ -221,8 +232,15 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
     
     
     /**
+     * Writes data to the database file, using the data from the HashMap 
+     *   associated with this object.
      * 
-     * @throws IOException 
+     * @throws DvdLibraryDaoException 
+     * Note: The string being written will appear like so in this exact order:
+     * 
+     * Id | Title | Release Date | Mpaa Rating | Director | Studio | User Rating
+     *  0 |   1   |      2       |      3      |     4    |    5   |     6  
+     * 
      */
     private void writeDataBase() throws DvdLibraryDaoException{      
         // Create variable to hold all Dvd data
