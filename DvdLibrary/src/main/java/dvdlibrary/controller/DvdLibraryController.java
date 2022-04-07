@@ -1,6 +1,7 @@
 package dvdlibrary.controller;
 
 import dvdlibrary.dao.DvdLibraryDao;
+import dvdlibrary.dao.DvdLibraryDaoException;
 import dvdlibrary.dao.DvdLibraryDaoFileImpl;
 import dvdlibrary.dto.Dvd;
 import dvdlibrary.ui.DvdLibraryView;
@@ -68,21 +69,21 @@ public class DvdLibraryController {
         return view.getMenuSelection();
     }
 
-    private void addDvd() throws IOException {
+    private void addDvd() throws DvdLibraryDaoException {
         view.displayAddDvdBanner();
         Dvd dvd = view.getDvdInfo();
         dao.addDvd(dvd.getId(), dvd);
         view.displayAddDvdSuccessBanner();
     }
 
-    private void removeDvd() throws IOException {
+    private void removeDvd() throws DvdLibraryDaoException {
         view.displayRemoveDvdBanner();
         String dvdId = view.getDvdId();
         dao.removeDvd(dvdId);
         view.displayRemoveDvdSuccessBanner();
     }
 
-    private void editDvd() throws IOException {
+    private void editDvd() throws DvdLibraryDaoException {
         view.displayEditDvdBanner();
         String dvdId = view.getDvdId();
         Dvd currentDvdInfo = dao.getDvd(dvdId);
@@ -92,14 +93,14 @@ public class DvdLibraryController {
         view.displayEditDvdSuccessBanner();
     }
 
-    private void listDvds() throws IOException { //TBI --- How are we storing the list of dvds? 
+    private void listDvds() throws DvdLibraryDaoException { 
         view.displayListDvdsBanner();
         List<Dvd> dvdList = dao.getAllDvds();
         view.displayDvdList(dvdList);
         view.displayEditDvdSuccessBanner();
     }
 
-    private void viewDvd() throws IOException{
+    private void viewDvd() throws DvdLibraryDaoException{
         view.displayViewDvdBanner();
         String dvdId = view.getDvdId();
         Dvd dvd = dao.getDvd(dvdId);
@@ -107,7 +108,7 @@ public class DvdLibraryController {
         view.displayEditDvdSuccessBanner();
     }
 
-    private void searchDvdTitle() throws IOException {
+    private void searchDvdTitle() throws DvdLibraryDaoException {
         view.displaySearchDvdBanner();
         String dvdTitle = view.getDvdTitle();
         Dvd dvd = dao.getDvd(dvdTitle);
