@@ -20,8 +20,18 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
     private Map<String, Dvd> mapDvd = new HashMap<>();
     
     // Constants for file name, delimeter
-    private static final String DATA_BASE = "dvdDataBase.txt";
-    private static final String DELIMETER = ",";
+    private final String DATA_BASE;
+    private static final String DELIMETER = ":::";
+    
+    // Constructors
+    public DvdLibraryDaoFileImpl(){
+        DATA_BASE = "dvdDataBase.txt";
+    }
+    
+    public DvdLibraryDaoFileImpl(String filePath){
+        DATA_BASE = filePath;
+    }
+    
        
     /**
      * Adds a dvd to the map associated with this instance of the class, then 
@@ -136,7 +146,7 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
         dvdAsString.append(dvd.getStudio()).append(DELIMETER);
         
         // Add userRating, delimter to sb                
-        dvdAsString.append(dvd.getUserRating()).append(DELIMETER);
+        dvdAsString.append(dvd.getUserRating());
         
         // Convert stringbuilder to string, return 
         return dvdAsString.toString();
