@@ -10,21 +10,29 @@ import java.util.List;
 
 /**
  *
- * @author Grant
+ * Program that will be the controller allow users to enter, store, recall and
+ * edit information about their DVD library
  */
-public class DvdLibraryController {
+public class DvdLibraryController
+    {
 
+    // Model and VIew class objects
     private DvdLibraryView view = new DvdLibraryView();
     private DvdLibraryDao dao = new DvdLibraryDaoFileImpl();
 
-    public void run() {
+    // Function that controls program flow
+    public void run()
+        {
         boolean keepGoing = true;
         int menuSelection = 0;
-        
-        try{
-            while (keepGoing) {
+
+        try
+            {
+            while (keepGoing)
+                {
                 menuSelection = getMenuSelection();
-                switch (menuSelection) {
+                switch (menuSelection)
+                    {
                     case 1:
                         addDvd();
                         break;
@@ -38,52 +46,59 @@ public class DvdLibraryController {
                         listDvds();
                         break;
                     case 5:
-                        viewDvd(); // TBI
+                        viewDvd(); 
                         break;
                     case 6:
-                        searchDvdTitle(); // TBI
+                        searchDvdTitle(); 
                         break;
                     case 7:
                         keepGoing = false;
                         break;
                     default:
                         unknownCommand();
+                    }
                 }
-            }
-        }catch(DvdLibraryDaoException e){
+            } catch (DvdLibraryDaoException e)
+            {
             System.out.println(e.getMessage());
-            //view.print(e.getMessage());
-        }
+            
+            }
         exitMessage();
-    }
-
-    private void exitMessage() {
+        }
+    // Let's user know they've exited
+    private void exitMessage()
+        {
         view.displayExitBanner();
-    }
-
-    private void unknownCommand() {
+        }
+    // Prompts user for a known command
+    private void unknownCommand()
+        {
         view.displayUnknownCommandBanner();
-    }
-
-    private int getMenuSelection() {
+        }
+    // Requests view to display the menu
+    private int getMenuSelection()
+        {
         return view.getMenuSelection();
-    }
-
-    private void addDvd() throws DvdLibraryDaoException {
+        }
+    // Adds a dvd to collection
+    private void addDvd() throws DvdLibraryDaoException
+        {
         view.displayAddDvdBanner();
         Dvd dvd = view.getDvdInfo();
         dao.addDvd(dvd.getId(), dvd);
         view.displayAddDvdSuccessBanner();
-    }
-
-    private void removeDvd() throws DvdLibraryDaoException {
+        }
+    // removes a dvd from the collection
+    private void removeDvd() throws DvdLibraryDaoException
+        {
         view.displayRemoveDvdBanner();
         String dvdId = view.getDvdId();
         dao.removeDvd(dvdId);
         view.displayRemoveDvdSuccessBanner();
-    }
-
-    private void editDvd() throws DvdLibraryDaoException {
+        }
+    // Function for editing a dvd
+    private void editDvd() throws DvdLibraryDaoException
+        {
         view.displayEditDvdBanner();
         String dvdId = view.getDvdId();
         Dvd currentDvdInfo = dao.getDvd(dvdId);
@@ -91,29 +106,32 @@ public class DvdLibraryController {
         Dvd newDvdInfo = view.getDvdInfo();
         dao.addDvd(dvdId, newDvdInfo);
         view.displayEditDvdSuccessBanner();
-    }
-
-    private void listDvds() throws DvdLibraryDaoException { 
+        }
+    // lists all dvd in the collection
+    private void listDvds() throws DvdLibraryDaoException
+        {
         view.displayListDvdsBanner();
         List<Dvd> dvdList = dao.getAllDvds();
         view.displayDvdList(dvdList);
         view.displayEditDvdSuccessBanner();
-    }
-
-    private void viewDvd() throws DvdLibraryDaoException{
+        }
+    // views a dvd by dvdID
+    private void viewDvd() throws DvdLibraryDaoException
+        {
         view.displayViewDvdBanner();
         String dvdId = view.getDvdId();
         Dvd dvd = dao.getDvd(dvdId);
         view.displayDvdInfo(dvd);
         view.displayEditDvdSuccessBanner();
-    }
-
-    private void searchDvdTitle() throws DvdLibraryDaoException {
+        }
+    // views a dvd by title
+    private void searchDvdTitle() throws DvdLibraryDaoException
+        {
         view.displaySearchDvdBanner();
         String dvdTitle = view.getDvdTitle();
         Dvd dvd = dao.getDvd(dvdTitle);
         view.displayDvdInfo(dvd);
         view.displayEditDvdSuccessBanner();
-    }
+        }
 
-}
+    }
