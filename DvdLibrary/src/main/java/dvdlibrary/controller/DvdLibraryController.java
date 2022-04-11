@@ -54,6 +54,15 @@ public class DvdLibraryController
                     case 7:
                         keepGoing = false;
                         break;
+                    case 8:
+                        searchDvdsByLastNYearsRelease();
+                        break;
+                    case 9:
+                        searchDvdsByMpaa();
+                        break;
+                    case 10:
+                        searchDvdsByDirector();
+                        break;  
                     default:
                         unknownCommand();
                     }
@@ -126,12 +135,45 @@ public class DvdLibraryController
         }
     // views a dvd by title
     private void searchDvdTitle() throws DvdLibraryDaoException
-        {
+    {
         view.displaySearchDvdBanner();
         String dvdTitle = view.getDvdTitle();
         Dvd dvd = dao.getDvd(dvdTitle);
         view.displayDvdInfo(dvd);
-        view.displayEditDvdSuccessBanner();
-        }
-
+        view.displayEditDvdSuccessBanner();    
     }
+    
+    /**
+     *  Finds all movies released within the last N years
+     */
+    private void searchDvdsByLastNYearsRelease() throws DvdLibraryDaoException{
+        view.displaySearchByNYearsBanner();
+        String yearRange = view.getNYears();
+        List<Dvd> dvdList = dao.getDvdsNYears();
+        view.displayDvdList(dvdList);
+        view.displayNYearsSearchSuccessBanner();
+    }
+    
+    /**
+     * Finds all movies with a given MPAA rating 
+     */
+    private void searchDvdsByMpaa() throws DvdLibraryDaoException{
+        view.displaySearchByMpaaRatingsBanner();
+        String mpaaRating = view.getSearchByMpaaRating();
+        List<Dvd> dvdList = dao.getDvdsMpaaRating();
+        view.displayDvdList(dvdList);
+        view.displaySearchByMpaaRatingSuccessBanner();
+    }
+    
+    /**
+     * Finds all movies by a certain director
+     */
+    private void searchDvdsByDirector() throws DvdLibraryDaoException(){
+        view.displaySearchByDirectorBanner();
+        String director = view.getSearchByDirector();
+        List<Dvd> dvdList = dao.getDvdsByDirector();
+        view.displayDvdList(dvdList);
+        view.displaySearchByDirectorSucessBanner();
+    }
+    
+}

@@ -55,7 +55,7 @@ public interface DvdLibraryDao {
     /*
         Returns a list of Dvds that have a specified MPAA rating
     */
-    List<Dvd> displayByRating()throws DvdLibraryDaoException;
+    List<Dvd> displayByRating(String rating)throws DvdLibraryDaoException;
     
     /*
         returns a list of Dvs that have a specified director.
