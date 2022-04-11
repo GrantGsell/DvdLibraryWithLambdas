@@ -2,6 +2,7 @@ package dvdlibrary.ui;
 
 import java.util.List;
 import dvdlibrary.dto.Dvd;
+import java.util.Map;
 
 public class DvdLibraryView {
 
@@ -80,12 +81,17 @@ public class DvdLibraryView {
 
     }
     
-    public void displayAverageAge(double avg){
-        io.print("The average age of the Dvds in the collection is " + avg);
+    public void printByDirector(Map<String, List<Dvd>> dvds){
+        
+        for(String rating : dvds.keySet() ){
+            System.out.println("=== Movies with a rating of" + rating + " =======");
+            displayDvdList(dvds.get(rating));
+        }
+        
     }
     
-    public void displayByStudio(List<Dvd> list){
-        displayDvdList(list);
+    public void displayAverageAge(double avg){
+        io.print("The average age of the Dvds in the collection is " + avg);
     }
 
     public String getNYears() {
