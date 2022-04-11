@@ -304,6 +304,7 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
         
     }
 
+    
     @Override
     public Map<String, List<Dvd>> displayByDirector(String director) throws DvdLibraryDaoException {
         
@@ -324,7 +325,7 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
      * Obtains an average age of all the movies
      */
     @Override
-    public Double averageAgeOfMovies() throws DvdLibraryDaoException{
+    public Double displayAverageAgeOfMovies() throws DvdLibraryDaoException{
         return mapDvd.values().stream()
                 .collect(Collectors.summingDouble((dvd) -> Double.parseDouble(dvd.getReleaseData()))) / mapDvd.size();
                 
