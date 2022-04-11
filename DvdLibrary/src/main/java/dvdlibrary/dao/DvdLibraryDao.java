@@ -46,5 +46,21 @@ public interface DvdLibraryDao {
      */
     Dvd removeDvd(String dvdId) throws DvdLibraryDaoException;
     
+    /*
+        Returns a list of Dvds that were released in the last
+        N years.
+    */
+    List<Dvd> releasedInNYears(int years) throws DvdLibraryDaoException;
+    
+    /*
+        Returns a list of Dvds that have a specified MPAA rating
+    */
+    List<Dvd> displayByRating()throws DvdLibraryDaoException;
+    
+    /*
+        returns a list of Dvs that have a specified director.
+    */
+    List<Dvd> displayByDirector(String director);
+    
     
 }

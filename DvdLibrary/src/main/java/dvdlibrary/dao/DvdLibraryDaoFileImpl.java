@@ -281,4 +281,19 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
         // Close the PrintWriter to prevent memory leak
         out.close();
     }
+
+    @Override
+    public List<Dvd> releasedInNYears(int years) throws DvdLibraryDaoException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Dvd> displayByRating() throws DvdLibraryDaoException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Dvd> displayByDirector(String director) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
