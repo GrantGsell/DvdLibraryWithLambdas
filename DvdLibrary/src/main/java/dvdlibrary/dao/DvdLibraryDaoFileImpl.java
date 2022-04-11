@@ -6,10 +6,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -284,11 +286,14 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
 
     @Override
     public List<Dvd> releasedInNYears(int years) throws DvdLibraryDaoException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        final int year = Calendar.getInstance().get(Calendar.YEAR) - years;
+                
+        return  mapDvd.values().stream().filter((dvd) -> Integer.parseInt(dvd.getReleaseData()) >= year).collect(Collectors.toList());
+             
     }
 
     @Override
-    public List<Dvd> displayByRating() throws DvdLibraryDaoException {
+    public List<Dvd> displayByRating(String Rating) throws DvdLibraryDaoException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
