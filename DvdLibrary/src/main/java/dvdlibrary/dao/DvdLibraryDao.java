@@ -2,6 +2,7 @@ package dvdlibrary.dao;
 import dvdlibrary.dto.Dvd;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 /**
  *
  * @author Grant
@@ -60,7 +61,17 @@ public interface DvdLibraryDao {
     /*
         returns a list of Dvs that have a specified director.
     */
-    List<Dvd> displayByDirector(String director);
+    Map<String, List<Dvd>> displayByDirector(String director);
     
+    
+    /**
+     * Returns a list of Dvds by studio
+     */
+    List<Dvd> displayByStudio(String studio) throws DvdLibraryDaoException;
+    
+    /**
+     * Finds the average age of all of the movies
+     */
+    Double displayAverageAgeOfMovies() throws DvdLibraryDaoException;
     
 }
