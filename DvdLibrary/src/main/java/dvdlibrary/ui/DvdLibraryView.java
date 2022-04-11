@@ -79,6 +79,14 @@ public class DvdLibraryView {
         io.print(dvd.getUserRating());
 
     }
+    
+    public void displayAverageAge(double avg){
+        io.print("The average age of the Dvds in the collection is " + avg);
+    }
+    
+    public void displayByStudio(List<Dvd> list){
+        displayDvdList(list);
+    }
 
     public String getNYears() {
         String nYears = io.readString("Filter for movies released in the last how many years?");
@@ -170,7 +178,7 @@ public class DvdLibraryView {
         io.print("=== DVD Search by Studio ===");
     }
     
-    public void averageAgeBanner(){
+    public void displayAverageAgeBanner(){
         io.print("=== Average age of movies in the collection ===");
     }
     
