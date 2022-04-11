@@ -170,7 +170,7 @@ public class DvdLibraryView {
         io.print("=== DVD Search by Studio ===");
     }
     
-    public void averageAgeBanner(){
+    public void displayAverageAgeBanner(){
         io.print("=== Average age of movies in the collection ===");
     }
     

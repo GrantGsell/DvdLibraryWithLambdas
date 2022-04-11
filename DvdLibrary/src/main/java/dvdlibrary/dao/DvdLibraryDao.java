@@ -60,7 +60,7 @@ public interface DvdLibraryDao {
     /*
         returns a list of Dvs that have a specified director.
     */
-    List<Dvd> displayByDirector(String director);
+    List<Dvd> displayByDirector(String director) throws DvdLibraryDaoException;
     
     
 }
