@@ -6,12 +6,10 @@ import dvdlibrary.dto.Dvd;
 public class DvdLibraryView {
 
     // Display menu selection
-
     private UserIO io = new UserIOConsoleImpl();
 
     // Note: Re-using code from StudentQuiz & Class Roster programs
-    public int getMenuSelection()
-    {
+    public int getMenuSelection() {
         io.print("Main Menu");
         io.print("1. Add DVD to Collection");
         io.print("2. Remove a DVD from Collection");
@@ -19,17 +17,23 @@ public class DvdLibraryView {
         io.print("4. List the DVDs in the collection");
         io.print("5. Display info of a particular DVD");
         io.print("6. Search a DVD by Title");
+        io.print("7. Find all movies released in the last N years");
+        io.print("8. Find all the movies with a given MPAA rating");
+        io.print("9. Find all the movies by a given director");
+        io.print("10. Find all the movies released by a particular studio");
+        io.print("11. Find the average age of the movies in the collection");
+        io.print("12. Find the newest movie in your collection");
+        io.print("13. Find the oldest movie in your collection");
+        io.print("14. Find the average number of notes associated with movies in your collection");
 
         return io.readInt("Select one of the choices above:");
     }
-    
 
     // Display the DVD List 
-    public void displayDvdList (List<Dvd> DVDLibrary) //or should it be displayDVDLibrary ?
+    public void displayDvdList(List<Dvd> DVDLibrary) //or should it be displayDVDLibrary ?
     {
-        for (Dvd currentDVD : DVDLibrary)
-        {
-            String dvdInfo = String.format("DVDid: %s DVDTitle: %s DVDDate: %s MPAARating : %s DirectorName : %s Studio : %s UserRating : %s" ,
+        for (Dvd currentDVD : DVDLibrary) {
+            String dvdInfo = String.format("DVDid: %s DVDTitle: %s DVDDate: %s MPAARating : %s DirectorName : %s Studio : %s UserRating : %s",
                     currentDVD.getId(),
                     currentDVD.getTitle(),
                     currentDVD.getReleaseData(),
@@ -44,8 +48,7 @@ public class DvdLibraryView {
     }
 
     //Display DVD info <--Should this go above the display list method?
-    public Dvd getDvdInfo()
-    {
+    public Dvd getDvdInfo() {
         String title = io.readString("Enter DVD Title:");
         String releaseData = io.readString("Enter DVD Release Date:");
         String mpaaRating = io.readString("Enter MPAA Rating:");
@@ -62,11 +65,10 @@ public class DvdLibraryView {
         currentDvd.setTitle(title);
         currentDvd.setUserRating(userRating);
         return currentDvd;
-        
+
     }
 
-    public void displayDvdInfo(Dvd dvd)
-    {
+    public void displayDvdInfo(Dvd dvd) {
         io.print(dvd.getTitle());
         io.print(dvd.getId());
         io.print(dvd.getReleaseData());
@@ -74,74 +76,87 @@ public class DvdLibraryView {
         io.print(dvd.getDirector());
         io.print(dvd.getStudio());
         io.print(dvd.getUserRating());
-        
+
     }
 
-    public String getDvdTitle()
-    {
+    public String getNYears() {
+        String nYears = io.readString("Filter for movies released in the last how many years?");
+        return nYears;
+    }
+
+    public String getSearchByMpaaRating() {
+        String mpaaRatingInput = io.readString("Enter an MPAA rating for which to filter");
+        return mpaaRatingInput;
+    }
+
+    public String getSearchByDirector() {
+        String directorSearchInput = io.readString("Enter a Director for whom to filter");
+        return directorSearchInput;
+    }
+
+    public String getDvdTitle() {
         String title = io.readString("What is the Title of the DVD?: ");
         return title;
     }
 
-    public String getDvdId()
-    {
+    public String getDvdId() {
         String Id = io.readString("What is the DVD's ID?: ");
         return Id;
     }
 
-    public void displayExitBanner() 
-    {
+    public void displayExitBanner() {
         io.print("=== Good Bye! ===");
     }
 
-    public void displayUnknownCommandBanner() 
-    {
+    public void displayUnknownCommandBanner() {
         io.print("=== Unknown Command ===");
     }
 
-    public void displayAddDvdBanner() 
-    {
+    public void displayAddDvdBanner() {
         io.print("=== Add DVD ===");
     }
 
-    public void displayAddDvdSuccessBanner() 
-    {
+    public void displayAddDvdSuccessBanner() {
         io.print("=== Success! ===");
     }
 
-    public void displayRemoveDvdBanner() 
-    {
+    public void displayRemoveDvdBanner() {
         io.print("=== Remove DVD ===");
     }
 
-    public void displayRemoveDvdSuccessBanner() 
-    {
+    public void displayRemoveDvdSuccessBanner() {
         io.print("=== Success! ===");
     }
 
-    public void displayListDvdsBanner() 
-    {
+    public void displayListDvdsBanner() {
         io.print("=== List Of DVDs ===");
     }
 
-    public void displayViewDvdBanner() 
-    {
+    public void displayViewDvdBanner() {
         io.print("=== DVD Details ===");
     }
 
-    public void displaySearchDvdBanner() 
-    {
+    public void displaySearchDvdBanner() {
         io.print("=== DVD Search ===");
     }
 
-    public void displayEditDvdBanner() 
-    {
+    public void displayEditDvdBanner() {
         io.print("=== Edit DVD ===");
     }
-    
-    public void displayEditDvdSuccessBanner() 
-    {
+
+    public void displayEditDvdSuccessBanner() {
         io.print("=== Success! ===");
     }
 
+    public void displaySearchByNYearsBanner() {
+        io.print("=== DVD Search by Years ===");
+    }
+
+    public void displaySearchByMpaaRatingsBanner() {
+        io.print("=== DVD Search by MPAA Rating ===");
+    }
+
+    public void displaySearchByDirectorBanner() {
+        io.print("=== DVD Search by Director Name ===");
+    }
 }

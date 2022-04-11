@@ -151,7 +151,7 @@ public class DvdLibraryController
         String yearRange = view.getNYears();
         List<Dvd> dvdList = dao.getDvdsNYears();
         view.displayDvdList(dvdList);
-        view.displayNYearsSearchSuccessBanner();
+        view.displayEditDvdSuccessBanner();
     }
     
     /**
@@ -162,18 +162,18 @@ public class DvdLibraryController
         String mpaaRating = view.getSearchByMpaaRating();
         List<Dvd> dvdList = dao.getDvdsMpaaRating();
         view.displayDvdList(dvdList);
-        view.displaySearchByMpaaRatingSuccessBanner();
+        view.displayEditDvdSuccessBanner();
     }
     
     /**
      * Finds all movies by a certain director
      */
-    private void searchDvdsByDirector() throws DvdLibraryDaoException(){
+    private void searchDvdsByDirector() throws DvdLibraryDaoException{
         view.displaySearchByDirectorBanner();
         String director = view.getSearchByDirector();
         List<Dvd> dvdList = dao.getDvdsByDirector();
         view.displayDvdList(dvdList);
-        view.displaySearchByDirectorSucessBanner();
+        view.displayEditDvdSuccessBanner();
     }
     
 }
