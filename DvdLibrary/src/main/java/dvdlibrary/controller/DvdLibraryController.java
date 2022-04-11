@@ -7,6 +7,7 @@ import dvdlibrary.dto.Dvd;
 import dvdlibrary.ui.DvdLibraryView;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -165,8 +166,8 @@ public class DvdLibraryController {
     private void searchDvdsByDirector() throws DvdLibraryDaoException {
         view.displaySearchByDirectorBanner();
         String director = view.getSearchByDirector();
-        List<Dvd> dvdList = dao.displayByDirector(director);
-        view.displayDvdList(dvdList);
+        Map<String, List<Dvd>> dvdList = dao.displayByDirector(director);
+        view.printByDirector(dvdList);
         view.displayEditDvdSuccessBanner();
     }
 
