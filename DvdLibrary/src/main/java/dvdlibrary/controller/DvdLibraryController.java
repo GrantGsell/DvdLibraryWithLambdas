@@ -171,16 +171,15 @@ public class DvdLibraryController {
     }
 
     private void searchDvdsByStudio() throws DvdLibraryDaoException {
-        view.displaySearchByStudioBanner();
-        String studio = view.getSearchByStudio();
+        view.displayByStudioBanner();
+        String studio = view.searchByStudio();
         List<Dvd> dvdList = dao.displayByStudio(studio);
         view.displayDvdList(dvdList);
         view.displayEditDvdSuccessBanner();
     }
     
     private void findAverageAge() throws DvdLibraryDaoException {
-        view.displayAverageAgeOfMovies();
-        String getAverageAge = view.getAverageAge();
+        view.displayAverageAgeBanner();
         Double averageAge = dao.displayAverageAgeOfMovies();
         view.displayAverageAge(averageAge);
         view.displayEditDvdSuccessBanner();
