@@ -52,15 +52,12 @@ public class DvdLibraryController
                         searchDvdTitle(); 
                         break;
                     case 7:
-                        keepGoing = false;
-                        break;
-                    case 8:
                         searchDvdsByLastNYearsRelease();
                         break;
-                    case 9:
+                    case 8:
                         searchDvdsByMpaa();
                         break;
-                    case 10:
+                    case 9:
                         searchDvdsByDirector();
                         break;  
                     default:
