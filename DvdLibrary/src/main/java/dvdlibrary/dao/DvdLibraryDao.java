@@ -61,11 +61,7 @@ public interface DvdLibraryDao {
     /*
         returns a list of Dvs that have a specified director.
     */
-<<<<<<< HEAD
-    List<Dvd> displayByDirector(String director) throws DvdLibraryDaoException;
-=======
-    Map<String, List<Dvd>> displayByDirector(String director);
->>>>>>> 21cc4141629dccc8816ad585b54b2c99bb9a2ad8
+    Map<String, List<Dvd>> displayByDirector(String director)  throws DvdLibraryDaoException ;
     
     
     /**
