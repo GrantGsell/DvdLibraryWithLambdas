@@ -305,8 +305,28 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
     }
 
     @Override
-    public List<Dvd> displayByDirector(String director) {
+    public Map<String, List<Dvd>> displayByDirector(String director) {
         
-        return mapDvd.values().stream().filter((dvd) -> dvd.getDirector().equalsIgnoreCase(director)).collect(Collectors.toList());
+        return mapDvd.values().stream().filter((dvd) -> dvd.getDirector().equalsIgnoreCase(director)).collect(Collectors.groupingBy((dvd) -> dvd.getReleaseData()));
+    }
+    
+    /**
+     * Obtains a list of Dvds by a given studio
+     */
+    @Override
+    public List<Dvd> displayByStudio(String studio) throws DvdLibraryDaoException{
+        return mapDvd.values().stream().filter((dvd) -> dvd.getStudio()
+                .equalsIgnoreCase(studio))
+                .collect(Collectors.toList());
+    }
+    
+    /**
+     * Obtains an average age of all the movies
+     */
+    @Override
+    public Double averageAgeOfMovies() throws DvdLibraryDaoException{
+        return mapDvd.values().stream()
+                .collect(Collectors.summingDouble((dvd) -> Double.parseDouble(dvd.getReleaseData()))) / mapDvd.size();
+                
     }
 }
