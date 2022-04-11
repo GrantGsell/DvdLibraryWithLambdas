@@ -25,6 +25,7 @@ public class DvdLibraryView {
         io.print("12. Find the newest movie in your collection");
         io.print("13. Find the oldest movie in your collection");
         io.print("14. Find the average number of notes associated with movies in your collection");
+        io.print("15. Exit the application.");
 
         return io.readInt("Select one of the choices above:");
     }
@@ -103,6 +104,11 @@ public class DvdLibraryView {
         String Id = io.readString("What is the DVD's ID?: ");
         return Id;
     }
+    
+    public String searchByStudio(){
+        String studio = io.readString("Enter a studio to filter the movies by: ");
+        return studio;
+    }
 
     public void displayExitBanner() {
         io.print("=== Good Bye! ===");
@@ -159,4 +165,13 @@ public class DvdLibraryView {
     public void displaySearchByDirectorBanner() {
         io.print("=== DVD Search by Director Name ===");
     }
+    
+    public void displayByStudioBanner(){
+        io.print("=== DVD Search by Studio ===");
+    }
+    
+    public void averageAgeBanner(){
+        io.print("=== Average age of movies in the collection ===");
+    }
+    
 }
