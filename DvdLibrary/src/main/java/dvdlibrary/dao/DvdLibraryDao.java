@@ -63,7 +63,6 @@ public interface DvdLibraryDao {
     */
     Map<String, List<Dvd>> displayByDirector(String director)  throws DvdLibraryDaoException ;
     
-    
     /**
      * Returns a list of Dvds by studio
      */
