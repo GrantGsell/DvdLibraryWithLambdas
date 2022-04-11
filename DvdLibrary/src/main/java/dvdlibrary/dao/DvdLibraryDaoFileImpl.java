@@ -284,6 +284,11 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
         out.close();
     }
 
+    
+    /*
+        will return a list containing all the dvs that were release up to
+        N years ago from teh current year.
+    */
     @Override
     public List<Dvd> releasedInNYears(int years) throws DvdLibraryDaoException {
         final int year = Calendar.getInstance().get(Calendar.YEAR) - years;
@@ -293,12 +298,15 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
     }
 
     @Override
-    public List<Dvd> displayByRating(String Rating) throws DvdLibraryDaoException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Dvd> displayByRating(String rating) throws DvdLibraryDaoException {
+        
+        return mapDvd.values().stream().filter((dvd) -> dvd.getMpaaRating().equalsIgnoreCase(rating)).collect(Collectors.toList());
+        
     }
 
     @Override
     public List<Dvd> displayByDirector(String director) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        return mapDvd.values().stream().filter((dvd) -> dvd.getDirector().equalsIgnoreCase(director)).collect(Collectors.toList());
     }
 }
