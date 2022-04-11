@@ -149,9 +149,9 @@ public class DvdLibraryController
     private void searchDvdsByLastNYearsRelease() throws DvdLibraryDaoException{
         view.displaySearchByNYearsBanner();
         String yearRange = view.getNYears();
-        List<Dvd> dvdList = dao.getDvdsNYears();
+        List<Dvd> dvdList = dao.releasedInNYears(Integer.parseInt(yearRange));
         view.displayDvdList(dvdList);
-        view.displayNYearsSearchSuccessBanner();
+        view.displayEditDvdSuccessBanner();
     }
     
     /**
@@ -160,9 +160,9 @@ public class DvdLibraryController
     private void searchDvdsByMpaa() throws DvdLibraryDaoException{
         view.displaySearchByMpaaRatingsBanner();
         String mpaaRating = view.getSearchByMpaaRating();
-        List<Dvd> dvdList = dao.getDvdsMpaaRating();
+        List<Dvd> dvdList = dao.displayByRating(mpaaRating);
         view.displayDvdList(dvdList);
-        view.displaySearchByMpaaRatingSuccessBanner();
+        view.displayEditDvdSuccessBanner();
     }
     
     /**
@@ -171,9 +171,9 @@ public class DvdLibraryController
     private void searchDvdsByDirector() throws DvdLibraryDaoException(){
         view.displaySearchByDirectorBanner();
         String director = view.getSearchByDirector();
-        List<Dvd> dvdList = dao.getDvdsByDirector();
+        List<Dvd> dvdList = dao.displayByDirector(director);
         view.displayDvdList(dvdList);
-        view.displaySearchByDirectorSucessBanner();
+        view.displayEditDvdSuccessBanner();
     }
     
 }
