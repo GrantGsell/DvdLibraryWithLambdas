@@ -9,9 +9,10 @@ package dvdlibrary.ui;
  * May your view be ever in your favor!
  * @author ahill
  */
-import dvdlibrary.ui.UserIO;
 import java.util.Scanner;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserIOConsoleImpl implements UserIO {
 
     final private Scanner console = new Scanner(System.in);

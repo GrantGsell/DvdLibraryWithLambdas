@@ -3,11 +3,20 @@ package dvdlibrary.ui;
 import java.util.List;
 import dvdlibrary.dto.Dvd;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DvdLibraryView {
 
     // Display menu selection
-    private UserIO io = new UserIOConsoleImpl();
+    private UserIO io;
+    
+    // Constructor for Dependency Injection
+    @Autowired
+    public DvdLibraryView(UserIO io){
+        this.io = io;
+    }
 
     // Note: Re-using code from StudentQuiz & Class Roster programs
     public int getMenuSelection() {

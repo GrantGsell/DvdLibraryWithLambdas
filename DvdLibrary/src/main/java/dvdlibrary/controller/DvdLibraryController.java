@@ -2,23 +2,31 @@ package dvdlibrary.controller;
 
 import dvdlibrary.dao.DvdLibraryDao;
 import dvdlibrary.dao.DvdLibraryDaoException;
-import dvdlibrary.dao.DvdLibraryDaoFileImpl;
 import dvdlibrary.dto.Dvd;
 import dvdlibrary.ui.DvdLibraryView;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * Program that will be the controller allow users to enter, store, recall and
  * edit information about their DVD library
  */
+@Component
 public class DvdLibraryController {
 
     // Model and VIew class objects
-    private DvdLibraryView view = new DvdLibraryView();
-    private DvdLibraryDao dao = new DvdLibraryDaoFileImpl();
+    private DvdLibraryView view;
+    private DvdLibraryDao dao; 
+    
+    // Controller Constructor for Dependency Injection
+    @Autowired
+    public DvdLibraryController(DvdLibraryView view, DvdLibraryDao dao){
+        this.view = view;
+        this.dao = dao;
+    }
 
     // Function that controls program flow
     public void run() {

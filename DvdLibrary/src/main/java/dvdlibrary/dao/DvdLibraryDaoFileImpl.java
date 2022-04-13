@@ -12,11 +12,14 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Grant
  */
+@Component
 public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
     // Hash Map containing Dvd database
     private Map<String, Dvd> mapDvd = new HashMap<>();
@@ -25,11 +28,13 @@ public class DvdLibraryDaoFileImpl implements DvdLibraryDao{
     private final String DATA_BASE;
     private static final String DELIMETER = ":::";
     
-    // Constructors
+    // Constructor for Dependency Injection
+    @Autowired
     public DvdLibraryDaoFileImpl(){
         DATA_BASE = "dvdDataBase.txt";
     }
     
+    // Constructor for testing
     public DvdLibraryDaoFileImpl(String filePath){
         DATA_BASE = filePath;
     }

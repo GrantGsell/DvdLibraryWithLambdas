@@ -1,6 +1,7 @@
 package dvdlibrary;
 
 import dvdlibrary.controller.DvdLibraryController;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
  *
@@ -9,7 +10,16 @@ import dvdlibrary.controller.DvdLibraryController;
 public class DvdLibrary {
 
     public static void main(String[] args) {
-        DvdLibraryController controller = new DvdLibraryController();
+        // Dependendcy Injection using Spring Annotations
+        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext();
+        appContext.scan("dvdlibrary");
+        appContext.refresh();
+       
+        DvdLibraryController controller = appContext.getBean("dvdLibraryController", DvdLibraryController.class);
         controller.run();
+        
+        
+        //DvdLibraryController controller = new DvdLibraryController();
+        //controller.run();
     }
 }
